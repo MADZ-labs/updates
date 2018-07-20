@@ -16,4 +16,4 @@ const monthNumberToString = (num, short = false) => {
   return short ? months[num].substring(0, 3) : months[num];
 };
 
-module.exports = monthNumberToString;
+module.exports.monthNumberToString = monthNumberToString;
