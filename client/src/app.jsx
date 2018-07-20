@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Update from './components/update.jsx';
 import Milestone from './components/milestone.jsx';
+import Divider from './components/divider.jsx';
 const sampleData = require('../../sampleData.js');
 
 class App extends React.Component {
