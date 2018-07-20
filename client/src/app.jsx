@@ -15,8 +15,18 @@ class App extends React.Component {
   }
 
   render() {
-    const updates = this.state.project.updates.slice(0).reverse().map((update, i) => {
-      return <Update key={i} update={update} />
+    const reversedUpdates = this.state.project.updates.slice(0).reverse();
+    const updates = reversedUpdates.map((update, i) => {
+      if (i > 0 && update.date.getMonth() < reversedUpdates[i - 1].date.getMonth()) {
+        return (
+          <div key={i}>
+            <Divider month={`${monthNumberToWordShortened(reversedUpdates[i - 1].date.getMonth())} ${reversedUpdates[i - 1].date.getFullYear()}`} />
+            <Update update={update} />
+          </div>
+        )
+      } else {
+        return <Update key={i} update={update} />
+      };
     });
 
     return  (
@@ -26,6 +36,34 @@ class App extends React.Component {
       </div>
     )
   }
+};
+
+const monthNumberToWordShortened = (num) => {
+  if (num === 0) {
+    return 'Jan'
+  } else if (num === 1) {
+    return 'Feb'
+  } else if (num === 2) {
+    return 'Mar'
+  } else if (num === 3) {
+    return 'Apr'
+  } else if (num === 4) {
+    return 'May'
+  } else if (num === 5) {
+    return 'Jun'
+  } else if (num === 6) {
+    return 'Jul'
+  } else if (num === 7) {
+    return 'Aug'
+  } else if (num === 8) {
+    return 'Sep'
+  } else if (num === 9) {
+    return 'Oct'
+  } else if (num === 10) {
+    return 'Nov'
+  } else {
+    return 'Dec'
+  };
 };
 
 ReactDOM.render(<App />, document.querySelector('#app'));
