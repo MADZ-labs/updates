@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Update from './components/update.jsx';
 import Milestone from './components/milestone.jsx';
 import Divider from './components/divider.jsx';
+import monthNumberToString from '../../helpers/monthNumberToString.js';
 const sampleData = require('../../sampleData.js');
 
 class App extends React.Component {
@@ -20,7 +21,7 @@ class App extends React.Component {
       if (i > 0 && update.date.getMonth() < reversedUpdates[i - 1].date.getMonth()) {
         return (
           <div key={i}>
-            <Divider month={`${monthNumberToWordShortened(reversedUpdates[i - 1].date.getMonth())} ${reversedUpdates[i - 1].date.getFullYear()}`} />
+            <Divider month={`${monthNumberToString(reversedUpdates[i - 1].date.getMonth(), true)} ${reversedUpdates[i - 1].date.getFullYear()}`} />
             <Update update={update} />
           </div>
         )
@@ -36,34 +37,6 @@ class App extends React.Component {
       </div>
     )
   }
-};
-
-const monthNumberToWordShortened = (num) => {
-  if (num === 0) {
-    return 'Jan'
-  } else if (num === 1) {
-    return 'Feb'
-  } else if (num === 2) {
-    return 'Mar'
-  } else if (num === 3) {
-    return 'Apr'
-  } else if (num === 4) {
-    return 'May'
-  } else if (num === 5) {
-    return 'Jun'
-  } else if (num === 6) {
-    return 'Jul'
-  } else if (num === 7) {
-    return 'Aug'
-  } else if (num === 8) {
-    return 'Sep'
-  } else if (num === 9) {
-    return 'Oct'
-  } else if (num === 10) {
-    return 'Nov'
-  } else {
-    return 'Dec'
-  };
 };
 
 ReactDOM.render(<App />, document.querySelector('#app'));
