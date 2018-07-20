@@ -23,9 +23,8 @@ class App extends React.Component {
 
     var updatesWithDividers = [];
     for (var i = 0; i < updates.length; i++) {
-      console.log(updates[i].props.update.date.getMonth(), updates[i - 1].props.update.date.getMonth());
-      if (i > 0 && updates[i].props.update.date.getMonth() < updates[i - 1].props.update.date.getMonth()) {
-        updatesWithDividers = updates.splice(i, 0, <Divider month={`${monthNumberToString(updates[i - 1].props.update.date.getMonth(), true)} ${updates[i - 1].props.update.date.getFullYear()}`} />);
+      if (i > 0 && !updates[i].props.month && !updates[i - 1].props.month && (updates[i].props.update.date.getMonth() < updates[i - 1].props.update.date.getMonth() || updates[i].props.update.date.getFullYear() < updates[i - 1].props.update.date.getFullYear())) {
+        updatesWithDividers = updates.splice(i, 0, <Divider key={'divider' + i} month={`${monthNumberToString(updates[i].props.update.date.getMonth(), true)} ${updates[i].props.update.date.getFullYear()}`} />);
       };
     };
 
