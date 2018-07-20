@@ -18,7 +18,7 @@ class App extends React.Component {
   render() {
     const reversedUpdates = this.state.project.updates.slice(0).reverse();
     const updates = reversedUpdates.map((update, i) => {
-      if (i > 0 && update.date.getMonth() < reversedUpdates[i - 1].date.getMonth()) {
+      if (i > 0 && (update.date.getMonth() < reversedUpdates[i - 1].date.getMonth() || update.date.getFullYear() < reversedUpdates[i - 1].date.getFullYear())) {
         return (
           <div key={i}>
             <Divider month={`${monthNumberToString(reversedUpdates[i - 1].date.getMonth(), true)} ${reversedUpdates[i - 1].date.getFullYear()}`} />
