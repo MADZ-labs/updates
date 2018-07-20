@@ -18,5 +18,3 @@ connection.connect((err) => {
     log.info(`connected at ${connection.threadId}`);
   }
 });
-
-module.exports = connection;
