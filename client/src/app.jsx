@@ -18,21 +18,24 @@ class App extends React.Component {
   render() {
     const reversedUpdates = this.state.project.updates.slice(0).reverse();
     const updates = reversedUpdates.map((update, i) => {
-      if (i > 0 && update.date.getMonth() < reversedUpdates[i - 1].date.getMonth()) {
-        return (
-          <div key={i}>
-            <Divider month={`${monthNumberToString(reversedUpdates[i - 1].date.getMonth(), true)} ${reversedUpdates[i - 1].date.getFullYear()}`} />
-            <Update update={update} />
-          </div>
-        )
-      } else {
-        return <Update key={i} update={update} />
-      };
+      return <Update key={i} update={update} />
     });
 
-    return  (
+    var updatesWithDividers = [];
+    for (var i = 0; i < updates.length; i++) {
+      console.log(updates[i].props.update.date.getMonth(), updates[i - 1].props.update.date.getMonth());
+      if (i > 0 && updates[i].props.update.date.getMonth() < updates[i - 1].props.update.date.getMonth()) {
+        updatesWithDividers = updates.splice(i, 0, <Divider month={`${monthNumberToString(updates[i - 1].props.update.date.getMonth(), true)} ${updates[i - 1].props.update.date.getFullYear()}`} />);
+      };
+    };
+
+    if (updatesWithDividers.length === 0) {
+      updatesWithDividers = updates;
+    };
+
+    return (
       <div>
-        {updates}
+        {updatesWithDividers}
         <Milestone project={this.state.project} />
       </div>
     )
