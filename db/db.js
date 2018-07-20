@@ -1,5 +1,9 @@
 const mysql = require('mysql');
 
+const Log = require('log');
+
+const log = new Log();
+
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -9,9 +13,9 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
   if (err) {
-    console.error(`error connecting: ${err.stack}`);
+    log.error(`error connecting: ${err.stack}`);
   } else {
-    console.log(`connected at ${connection.threadId}`);
+    log.info(`connected at ${connection.threadId}`);
   }
 });
 
