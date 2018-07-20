@@ -1,5 +1,9 @@
 const express = require('express');
 
+const Log = require('log');
+
+const log = new Log();
+
 const app = express();
 const port = process.env.PORT || 3004;
 
@@ -10,7 +14,7 @@ app.get('/updates', (req, res) => {
 });
 
 if (process.env.NODE_ENV !== 'test') {
-  app.listen(port, console.log(`server running on port ${port}`));
+  app.listen(port, log.info(`server running on port ${port}`));
 }
 
 module.exports = app;
