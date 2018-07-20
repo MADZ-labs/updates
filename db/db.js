@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  host: 'locahost',
+  host: 'localhost',
   user: 'root',
   password: '',
   database: 'update_feature',
@@ -14,3 +14,5 @@ connection.connect((err) => {
     console.log(`connected at ${connection.threadId}`);
   }
 });
+
+module.exports = connection;
