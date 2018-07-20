@@ -1,7 +1,8 @@
 import './styles/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Update from './components/update.jsx'
+import Update from './components/update.jsx';
+import Milestone from './components/milestone.jsx';
 const sampleData = require('../../sampleData.js');
 
 class App extends React.Component {
@@ -20,6 +21,7 @@ class App extends React.Component {
     return  (
       <div>
         {updates}
+        <Milestone project={this.state.project} />
       </div>
     )
   }
