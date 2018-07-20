@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Update from './components/update.jsx';
 import Milestone from './components/milestone.jsx';
 import Divider from './components/divider.jsx';
-import monthNumberToString from '../../helpers/monthNumberToString.js';
+import helpers from '../../helpers/helpers.js';
 const sampleData = require('../../sampleData.js');
 
 class App extends React.Component {
@@ -24,7 +24,7 @@ class App extends React.Component {
     var updatesWithDividers = [];
     for (var i = 0; i < updates.length; i++) {
       if (i > 0 && !updates[i].props.month && !updates[i - 1].props.month && (updates[i].props.update.date.getMonth() < updates[i - 1].props.update.date.getMonth() || updates[i].props.update.date.getFullYear() < updates[i - 1].props.update.date.getFullYear())) {
-        updatesWithDividers = updates.splice(i, 0, <Divider key={'divider' + i} month={`${monthNumberToString(updates[i].props.update.date.getMonth(), true)} ${updates[i].props.update.date.getFullYear()}`} />);
+        updatesWithDividers = updates.splice(i, 0, <Divider key={'divider' + i} month={`${helpers.monthNumberToString(updates[i].props.update.date.getMonth(), true)} ${updates[i].props.update.date.getFullYear()}`} />);
       };
     };
 
