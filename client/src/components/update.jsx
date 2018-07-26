@@ -8,11 +8,15 @@ const Update = (props) => {
   let desc = null;
   let backersOnly = null;
   if (!props.update.backersOnly) {
-    desc = <p>{props.update.description}</p>
+    desc = <p>
+             {props.update.description}
+           </p>
   } else {
-    backersOnly = <span>For backers only</span>
+    backersOnly = <span>
+                    For backers only
+                  </span>
   };
-  
+
   return (
     <div>
       <hr></hr>
