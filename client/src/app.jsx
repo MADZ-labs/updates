@@ -1,9 +1,9 @@
 import './styles/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Update from './components/update';
-import Milestone from './components/milestone';
-import Divider from './components/divider';
+import Update from './components/update.jsx';
+import Milestone from './components/milestone.jsx';
+import Divider from './components/divider.jsx';
 import helpers from '../../helpers/helpers';
 
 const sampleData = require('../../sampleData.js');
