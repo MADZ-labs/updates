@@ -23,7 +23,7 @@ class App extends React.Component {
 
     for (var i = 0; i < updates.length; i++) {
       if (updates[i].props.update.date < new Date() && updates[i].props.update.date < this.state.project.endingDate) {
-        updates.splice(i, 0, <Milestone key={'goalReached'} project={this.state.project} update={updates[i]} />);
+        updates.splice(i, 0, <Milestone key={'goalReached' + i} project={this.state.project} update={updates[i]} />);
         break;
       };
     };
