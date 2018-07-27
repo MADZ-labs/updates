@@ -9,7 +9,7 @@ const Update = (props) => {
   let backersOnly = null;
   if (!props.update.backersOnly) {
     desc = <p>
-             {props.update.description}
+             {helpers.cutOffDesc(props.update.description)}
            </p>
   } else {
     backersOnly = <span>
