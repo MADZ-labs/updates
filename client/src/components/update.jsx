@@ -1,21 +1,42 @@
 import React from 'react';
-import helpers from '../../../helpers/helpers.js';
+import PropTypes from 'prop-types';
+import helpers from '../../../helpers/helpers';
 
-const Update = (props) => {
-  const date = props.update.date;
+const Update = ({ update }) => {
+  const { date } = update;
   const formattedDate = `${helpers.monthNumberToString(date.getMonth())} ${date.getDate()}, ${date.getFullYear()}`;
   return (
     <div>
-      <hr></hr>
-      <p>{formattedDate}</p>
-      <h3>{props.update.title}</h3>
-      <p>{props.update.description}</p>
-      <span>{props.update.comments} comments</span>
-      &nbsp;&nbsp;
-      <span>{props.update.likes} likes</span>
-      <hr></hr>
+      <hr />
+      <p>
+        {formattedDate}
+      </p>
+      <h3>
+        {update.title}
+      </h3>
+      <p>
+        {update.description}
+      </p>
+      <span>
+        {`${update.comments} comments`}
+      </span>
+      <span>
+        {`${update.likes} likes`}
+      </span>
+      <hr />
     </div>
-  )
+  );
+};
+
+Update.propTypes = {
+  update: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    date: PropTypes.instanceOf(Date),
+    comments: PropTypes.number,
+    likes: PropTypes.number,
+    backersOnly: PropTypes.bool,
+  }).isRequired,
 };
 
 module.exports = Update;
