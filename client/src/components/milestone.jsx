@@ -39,7 +39,7 @@ Milestone.propTypes = {
       date: PropTypes.instanceOf(Date),
       comments: PropTypes.number,
       likes: PropTypes.number,
-      backersOnly: PropTypes.boolean,
+      backersOnly: PropTypes.bool,
     })),
   }).isRequired,
 };
