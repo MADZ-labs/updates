@@ -8,6 +8,9 @@
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
-    }
-  }
+    },
+  },
+  "rules": {
+    "import/extensions": 0,
+  },
 }
