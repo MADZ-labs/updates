@@ -17,13 +17,20 @@ class App extends React.Component {
 
   render() {
     const reversedUpdates = this.state.project.updates.slice(0).reverse();
-    const updates = reversedUpdates.map((update, i) => {
+    let updates = reversedUpdates.map((update, i) => {
       return <Update key={i} update={update} />
     });
 
+    for (var i = 0; i < updates.length; i++) {
+      if (updates[i].props.update.date < new Date() && updates[i].props.update.date < this.state.project.endingDate) {
+        updates.splice(i, 0, <Milestone project={this.state.project} update={updates[i]} />);
+        break;
+      };
+    };
+
     var updatesWithDividers = [];
     for (var i = 0; i < updates.length; i++) {
-      if (i > 0 && !updates[i].props.month && !updates[i - 1].props.month && (updates[i].props.update.date.getMonth() < updates[i - 1].props.update.date.getMonth() || updates[i].props.update.date.getFullYear() < updates[i - 1].props.update.date.getFullYear())) {
+      if (i > 0 && !updates[i].props.project && !updates[i - 1].props.project && !updates[i].props.month && !updates[i - 1].props.month && (updates[i].props.update.date.getMonth() < updates[i - 1].props.update.date.getMonth() || updates[i].props.update.date.getFullYear() < updates[i - 1].props.update.date.getFullYear())) {
         updatesWithDividers = updates.splice(i, 0, <Divider key={'divider' + i} month={`${helpers.monthNumberToString(updates[i].props.update.date.getMonth(), true)} ${updates[i].props.update.date.getFullYear()}`} />);
       };
     };
