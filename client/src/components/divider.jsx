@@ -1,11 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Divider = (props) => {
-  return (
-    <div>
-      <span>{props.month}</span>
-    </div>
-  )
+const Divider = ({ month }) => (
+  <span>
+    {month}
+  </span>
+);
+
+Divider.propTypes = {
+  month: PropTypes.number.isRequired,
 };
 
 module.exports = Divider;

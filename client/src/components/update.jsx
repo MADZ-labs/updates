@@ -1,34 +1,54 @@
 import React from 'react';
-import helpers from '../../../helpers/helpers.js';
+import PropTypes from 'prop-types';
+import helpers from '../../../helpers/helpers';
 
-const Update = (props) => {
-  const date = props.update.date;
+const Update = ({ update }) => {
+  const { date, backersOnly, description } = update;
   const formattedDate = `${helpers.monthNumberToString(date.getMonth())} ${date.getDate()}, ${date.getFullYear()}`;
 
   let desc = null;
-  let backersOnly = null;
-  if (!props.update.backersOnly) {
+  let backersOnlyDesc = null;
+  if (!backersOnly) {
     desc = <p>
-             {helpers.cutOffDesc(props.update.description)}
+             {helpers.cutOffDesc(description)}
            </p>
   } else {
-    backersOnly = <span>
-                    For backers only
-                  </span>
+    backersOnlyDesc = <span>
+                        For backers only
+                      </span>
   };
 
   return (
     <div>
-      <hr></hr>
-      <p>{formattedDate}</p>
-      <h3>{props.update.title}</h3>
+      <hr />
+      <p>
+        {formattedDate}
+      </p>
+      <h3>
+        {update.title}
+      </h3>
       {desc}
-      <span>{props.update.comments} comments</span>
-      <span>{props.update.likes} likes</span>
-      {backersOnly}
-      <hr></hr>
+      <span>
+        {`${update.comments} comments`}
+      </span>
+      <span>
+        {`${update.likes} likes`}
+      </span>
+      {backersOnlyDesc}
+      <hr />
     </div>
-  )
+  );
+};
+
+Update.propTypes = {
+  update: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    date: PropTypes.instanceOf(Date),
+    comments: PropTypes.number,
+    likes: PropTypes.number,
+    backersOnly: PropTypes.bool,
+  }).isRequired,
 };
 
 module.exports = Update;
