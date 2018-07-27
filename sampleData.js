@@ -30,6 +30,14 @@ module.exports = [
         likes: 7,
         backersOnly: false,
       },
+      {
+        title: 'Thanks!',
+        description: 'We just wanted to reach out and say thanks once again to everyone! We did it!',
+        date: new Date('July 14, 2018'),
+        comments: 2,
+        likes: 2,
+        backersOnly: false,
+      },
     ],
   },
 ];
