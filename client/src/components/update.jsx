@@ -3,8 +3,21 @@ import PropTypes from 'prop-types';
 import helpers from '../../../helpers/helpers';
 
 const Update = ({ update }) => {
-  const { date } = update;
+  const { date, backersOnly, description } = update;
   const formattedDate = `${helpers.monthNumberToString(date.getMonth())} ${date.getDate()}, ${date.getFullYear()}`;
+
+  let desc = null;
+  let backersOnlyDesc = null;
+  if (!backersOnly) {
+    desc = <p>
+             {helpers.cutOffDesc(description)}
+           </p>
+  } else {
+    backersOnlyDesc = <span>
+                        For backers only
+                      </span>
+  };
+
   return (
     <div>
       <hr />
@@ -14,15 +27,14 @@ const Update = ({ update }) => {
       <h3>
         {update.title}
       </h3>
-      <p>
-        {update.description}
-      </p>
+      {desc}
       <span>
         {`${update.comments} comments`}
       </span>
       <span>
         {`${update.likes} likes`}
       </span>
+      {backersOnlyDesc}
       <hr />
     </div>
   );

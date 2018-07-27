@@ -16,4 +16,11 @@ const monthNumberToString = (num, short = false) => {
   return short ? months[num].substring(0, 3) : months[num];
 };
 
+const cutOffDesc = (desc) => {
+  const words = desc.split(' ');
+  if (words.length > 24) return `${words.slice(0, 24).join(' ')}... Read more`;
+  return desc;
+};
+
 module.exports.monthNumberToString = monthNumberToString;
+module.exports.cutOffDesc = cutOffDesc;
