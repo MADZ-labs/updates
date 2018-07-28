@@ -17,7 +17,7 @@ const UpdateDiv = styled.div`
     font-weight: bold;
   }
   > span {
-    padding: 0 10px;
+    padding: 0 15px;
     font-size: 14px;
   }
   > h3 {
@@ -36,8 +36,21 @@ const UpdateDiv = styled.div`
       background: #ffc29e;
     }
   }
-  > #backersSpan {
+  > div {
+    display: inline;
+    margin: 15px;
+  }
+  > div > #backersSpan {
     font-weight: bold;
+  }
+  > div > div {
+    display: inline;
+    margin: 0 2px;
+    padding: 2px 5px;
+    border-radius: 50%;
+    background: black;
+    color: white;
+    font-size: 10px;
   }
 `;
 
@@ -65,9 +78,14 @@ const Update = ({ update }) => {
     );
   } else {
     backersOnlyDesc = (
-      <span id="backersSpan">
-        For backers only
-      </span>
+      <div>
+        <div>
+          B
+        </div>
+        <span id="backersSpan">
+          For backers only
+        </span>
+      </div>
     );
   }
 
