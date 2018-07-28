@@ -5,10 +5,11 @@ import helpers from '../../../helpers/helpers';
 
 const UpdateDiv = styled.div`
   margin: 50px auto;
-  padding: 10px;
+  padding: 25px;
   width: 50%;
   text-align: center;
   font-family: sans-serif;
+  background: white;
   > * {
     color: #2b2727;
   }
@@ -46,10 +47,20 @@ const Update = ({ update }) => {
 
   let desc = null;
   let backersOnlyDesc = null;
-  if (!backersOnly) {
+  const shortDescription = helpers.cutOffDesc(description);
+  if (!backersOnly && shortDescription.length === description.length) {
     desc = (
       <p>
-        {helpers.cutOffDesc(description)}
+        {description}
+      </p>
+    );
+  } else if (!backersOnly && shortDescription.length !== description.length) {
+    desc = (
+      <p>
+        {shortDescription}
+        <span style={{ textDecoration: 'underline' }}>
+          Read more
+        </span>
       </p>
     );
   } else {
