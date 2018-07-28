@@ -4,11 +4,19 @@ import styled from 'styled-components';
 import helpers from '../../../helpers/helpers';
 
 const Milestone = ({ update, project }) => {
+  let bg = '';
+  if (update && project.moneyRaised > project.goal) {
+    bg = '#009E74';
+  } else if (update && project.moneyRaised < project.goal) {
+    bg = '#f55649';
+  } else {
+    bg = '#034752';
+  }
   const MilestoneDiv = styled.div`
     margin: 50px auto;
     padding: 50px 25px;
     color: white;
-    background: ${!update ? '#034752' : '#009E74'}
+    background: ${bg}
     width: 550px;
     text-align: center;
     font-family: sans-serif;
@@ -26,12 +34,15 @@ const Milestone = ({ update, project }) => {
   `;
   let date = null;
   let message = null;
-  if (!update) {
-    date = project.dateCreated;
-    message = 'Project launched';
-  } else {
+  if (update && project.moneyRaised > project.goal) {
     date = project.endingDate;
     message = `Successfully raised ${project.moneyRaised} with ${project.backers} backers`;
+  } else if (update && project.moneyRaised < project.goal) {
+    date = project.endingDate;
+    message = `Project failed to raise goal of ${project.goal}`;
+  } else {
+    date = project.dateCreated;
+    message = 'Project launched';
   }
   const formattedDate = `${helpers.monthNumberToString(date.getMonth())} ${date.getDate()}, ${date.getFullYear()}`;
   return (
