@@ -53,6 +53,9 @@ const UpdateDiv = styled.div`
     color: white;
     font-size: 10px;
   }
+  > p > span {
+    text-decoration: underline;
+  }
 `;
 
 const Update = ({ update }) => {
@@ -72,7 +75,7 @@ const Update = ({ update }) => {
     desc = (
       <p>
         {shortDescription}
-        <span style={{ textDecoration: 'underline' }}>
+        <span>
           Read more
         </span>
       </p>
