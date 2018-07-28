@@ -10,7 +10,19 @@ import helpers from '../../helpers/helpers';
 const sampleData = require('../../sampleData.js');
 
 const AppDiv = styled.div`
-  margin: 55px 0;
+
+`;
+
+const Timeline = styled.div`
+  position: absolute;
+  margin: 50px auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background: #eee;
+  z-index: -1;
 `;
 
 class App extends React.Component {
@@ -55,6 +67,7 @@ class App extends React.Component {
       <AppDiv>
         {updates}
         <Milestone project={project} />
+        <Timeline />
       </AppDiv>
     );
   }
