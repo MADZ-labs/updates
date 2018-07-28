@@ -42,6 +42,7 @@ const UpdateDiv = styled.div`
   }
   > div > #backersSpan {
     font-weight: bold;
+    font-size: 14px;
   }
   > div > div {
     display: inline;
