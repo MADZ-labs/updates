@@ -1,6 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import helpers from '../../../helpers/helpers';
+
+const UpdateDiv = styled.div`
+  margin: 50px auto;
+  padding: 10px;
+  width: 50%;
+  text-align: center;
+  font-family: sans-serif;
+  > * {
+    color: #2b2727;
+  }
+  > span:nth-child(1) {
+    font-weight: bold;
+  }
+  > span {
+    padding: 0 10px;
+    font-size: 14px;
+  }
+  > h3 {
+    display: table;
+    margin: 10px auto;
+    padding: 0 5px;
+    font-family: 'EB Garamond', serif;
+    font-size: 36px;
+  }
+  > p {
+    font-size: 16px;
+  }
+  &:hover {
+    cursor: pointer;
+    > h3 {
+      background: #ffc29e;
+    }
+  }
+  > #backersSpan {
+    font-weight: bold;
+  }
+`;
 
 const Update = ({ update }) => {
   const { date, backersOnly, description } = update;
@@ -9,21 +47,24 @@ const Update = ({ update }) => {
   let desc = null;
   let backersOnlyDesc = null;
   if (!backersOnly) {
-    desc = <p>
-             {helpers.cutOffDesc(description)}
-           </p>
+    desc = (
+      <p>
+        {helpers.cutOffDesc(description)}
+      </p>
+    );
   } else {
-    backersOnlyDesc = <span>
-                        For backers only
-                      </span>
-  };
+    backersOnlyDesc = (
+      <span id="backersSpan">
+        For backers only
+      </span>
+    );
+  }
 
   return (
-    <div>
-      <hr />
-      <p>
+    <UpdateDiv>
+      <span>
         {formattedDate}
-      </p>
+      </span>
       <h3>
         {update.title}
       </h3>
@@ -35,8 +76,7 @@ const Update = ({ update }) => {
         {`${update.likes} likes`}
       </span>
       {backersOnlyDesc}
-      <hr />
-    </div>
+    </UpdateDiv>
   );
 };
 
