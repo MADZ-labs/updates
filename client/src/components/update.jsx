@@ -71,6 +71,24 @@ const Update = ({ update }) => {
     );
   }
 
+  let comments = null;
+  if (update.comments > 0) {
+    comments = (
+      <span>
+        {`${update.comments} comments`}
+      </span>
+    );
+  }
+
+  let likes = null;
+  if (update.likes > 0) {
+    likes = (
+      <span>
+        {`${update.likes} likes`}
+      </span>
+    );
+  }
+
   return (
     <UpdateDiv>
       <span>
@@ -80,12 +98,8 @@ const Update = ({ update }) => {
         {update.title}
       </h3>
       {desc}
-      <span>
-        {`${update.comments} comments`}
-      </span>
-      <span>
-        {`${update.likes} likes`}
-      </span>
+      {comments}
+      {likes}
       {backersOnlyDesc}
     </UpdateDiv>
   );
