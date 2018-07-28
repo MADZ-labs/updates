@@ -18,7 +18,7 @@ const monthNumberToString = (num, short = false) => {
 
 const cutOffDesc = (desc) => {
   const words = desc.split(' ');
-  if (words.length > 24) return `${words.slice(0, 24).join(' ')}... Read more`;
+  if (words.length > 24) return `${words.slice(0, 24).join(' ')}... `;
   return desc;
 };
 

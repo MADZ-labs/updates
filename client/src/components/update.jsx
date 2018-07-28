@@ -5,10 +5,11 @@ import helpers from '../../../helpers/helpers';
 
 const UpdateDiv = styled.div`
   margin: 50px auto;
-  padding: 10px;
+  padding: 25px;
   width: 50%;
   text-align: center;
   font-family: sans-serif;
+  background: white;
   > * {
     color: #2b2727;
   }
@@ -16,7 +17,7 @@ const UpdateDiv = styled.div`
     font-weight: bold;
   }
   > span {
-    padding: 0 10px;
+    padding: 0 15px;
     font-size: 14px;
   }
   > h3 {
@@ -35,8 +36,25 @@ const UpdateDiv = styled.div`
       background: #ffc29e;
     }
   }
-  > #backersSpan {
+  > div {
+    display: inline;
+    margin: 15px;
+  }
+  > div > #backersSpan {
     font-weight: bold;
+    font-size: 14px;
+  }
+  > div > div {
+    display: inline;
+    margin: 0 2px;
+    padding: 2px 5px;
+    border-radius: 50%;
+    background: black;
+    color: white;
+    font-size: 10px;
+  }
+  > p > span {
+    text-decoration: underline;
   }
 `;
 
@@ -46,16 +64,49 @@ const Update = ({ update }) => {
 
   let desc = null;
   let backersOnlyDesc = null;
-  if (!backersOnly) {
+  const shortDescription = helpers.cutOffDesc(description);
+  if (!backersOnly && shortDescription.length === description.length) {
     desc = (
       <p>
-        {helpers.cutOffDesc(description)}
+        {description}
+      </p>
+    );
+  } else if (!backersOnly && shortDescription.length !== description.length) {
+    desc = (
+      <p>
+        {shortDescription}
+        <span>
+          Read more
+        </span>
       </p>
     );
   } else {
     backersOnlyDesc = (
-      <span id="backersSpan">
-        For backers only
+      <div>
+        <div>
+          B
+        </div>
+        <span id="backersSpan">
+          For backers only
+        </span>
+      </div>
+    );
+  }
+
+  let comments = null;
+  if (update.comments > 0) {
+    comments = (
+      <span>
+        {`${update.comments} comments`}
+      </span>
+    );
+  }
+
+  let likes = null;
+  if (update.likes > 0) {
+    likes = (
+      <span>
+        {`${update.likes} likes`}
       </span>
     );
   }
@@ -69,12 +120,8 @@ const Update = ({ update }) => {
         {update.title}
       </h3>
       {desc}
-      <span>
-        {`${update.comments} comments`}
-      </span>
-      <span>
-        {`${update.likes} likes`}
-      </span>
+      {comments}
+      {likes}
       {backersOnlyDesc}
     </UpdateDiv>
   );
