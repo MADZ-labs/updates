@@ -1,6 +1,7 @@
 import './styles/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import styled from 'styled-components';
 import Update from './components/update.jsx';
 import Milestone from './components/milestone.jsx';
@@ -33,6 +34,23 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    axios.get('/projects/21')
+      .then((response) => {
+        response.data.dateCreated = new Date(response.data.dateCreated);
+        response.data.endingDate = new Date(response.data.endingDate);
+        response.data.updates.forEach((update) => {
+          update.updateDate = new Date(update.updateDate);
+          update.backersOnly = !!update.backersOnly;
+        });
+        this.setState({
+          project: response.data,
+        });
+      }).catch((error) => {
+        throw error;
+      });
+  }
+
   render() {
     const { project } = this.state;
     const reversedUpdates = project.updates.slice(0).reverse();
@@ -43,8 +61,8 @@ class App extends React.Component {
         highlightColor={helpers.getColor()}
       />));
     for (let i = 0; i < updates.length; i += 1) {
-      if (updates[i].props.update.date < new Date()
-      && updates[i].props.update.date < project.endingDate) {
+      if (updates[i].props.update.updateDate < new Date()
+      && updates[i].props.update.updateDate < project.endingDate) {
         let updateProp = {};
         if (i === 0) {
           const { update } = updates[0].props;
@@ -65,24 +83,25 @@ class App extends React.Component {
     for (let i = 0; i < updates.length; i += 1) {
       // puts divider after milestone if milestone is the most recent update
       if (i === 0 && updates[i].props.project
-        && (updates[i + 1].props.update.date.getMonth()
+        && (updates[i + 1].props.update.updateDate.getMonth()
         < updates[i].props.project.endingDate.getMonth()
-        || updates[i + 1].props.update.date.getFullYear()
+        || updates[i + 1].props.update.updateDate.getFullYear()
         < updates[i].props.project.endingDate.getFullYear())) {
         updates.splice(i + 1, 0, <Divider
           key={`divider ${i}`}
-          month={`${helpers.monthNumberToString(updates[i].props.update.date.getMonth(), true)}
-          ${updates[i].props.update.date.getFullYear()}`}
+          month={`${helpers.monthNumberToString(updates[i].props.update.updateDate.getMonth(), true)}
+          ${updates[i].props.update.updateDate.getFullYear()}`}
         />);
       // puts divider before updates if they are earlier in time by a month or year
       } else if (i > 0 && !updates[i].props.month && !updates[i - 1].props.month
-        && (updates[i].props.update.date.getMonth() < updates[i - 1].props.update.date.getMonth()
-        || updates[i].props.update.date.getFullYear()
-        < updates[i - 1].props.update.date.getFullYear())) {
+        && (updates[i].props.update.updateDate.getMonth()
+        < updates[i - 1].props.update.updateDate.getMonth()
+        || updates[i].props.update.updateDate.getFullYear()
+        < updates[i - 1].props.update.updateDate.getFullYear())) {
         updates.splice(i, 0, <Divider
           key={`divider ${i}`}
-          month={`${helpers.monthNumberToString(updates[i].props.update.date.getMonth(), true)}
-          ${updates[i].props.update.date.getFullYear()}`}
+          month={`${helpers.monthNumberToString(updates[i].props.update.updateDate.getMonth(), true)}
+          ${updates[i].props.update.updateDate.getFullYear()}`}
         />);
       }
     }

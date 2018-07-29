@@ -7,7 +7,7 @@ const log = new Log();
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'password',
   database: 'update_feature',
 });
 
@@ -18,3 +18,5 @@ connection.connect((err) => {
     log.info(`connected at ${connection.threadId}`);
   }
 });
+
+module.exports = connection;

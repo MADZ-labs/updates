@@ -58,8 +58,8 @@ const Update = ({ update, highlightColor }) => {
       text-decoration: underline;
     }
   `;
-  const { date, backersOnly, description } = update;
-  const formattedDate = `${helpers.monthNumberToString(date.getMonth())} ${date.getDate()}, ${date.getFullYear()}`;
+  const { updateDate, backersOnly, description } = update;
+  const formattedDate = `${helpers.monthNumberToString(updateDate.getMonth())} ${updateDate.getDate()}, ${updateDate.getFullYear()}`;
 
   let desc = null;
   let backersOnlyDesc = null;
@@ -133,7 +133,7 @@ Update.propTypes = {
     date: PropTypes.instanceOf(Date),
     comments: PropTypes.number,
     likes: PropTypes.number,
-    backersOnly: PropTypes.bool,
+    backers_only: PropTypes.bool,
   }).isRequired,
   highlightColor: PropTypes.string.isRequired,
 };
