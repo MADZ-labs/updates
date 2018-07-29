@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.11.3
+      - image: node
+      - image: mysql
     steps:
       - checkout
       - run: npm install
