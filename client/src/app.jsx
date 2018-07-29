@@ -36,22 +36,46 @@ class App extends React.Component {
   render() {
     const { project } = this.state;
     const reversedUpdates = project.updates.slice(0).reverse();
-    const updates = reversedUpdates.map(update => <Update key={update} update={update} />);
-
+    const updates = reversedUpdates.map(update => (
+      <Update
+        key={update}
+        update={update}
+        highlightColor={helpers.getColor()}
+      />));
     for (let i = 0; i < updates.length; i += 1) {
       if (updates[i].props.update.date < new Date()
       && updates[i].props.update.date < project.endingDate) {
+        let updateProp = {};
+        if (i === 0) {
+          const { update } = updates[0].props;
+          updateProp = update;
+        } else {
+          const { update } = updates[i - 1].props;
+          updateProp = update;
+        }
         updates.splice(i, 0, <Milestone
           key={`milestone ${i}`}
           project={project}
-          update={updates[i].props.update}
+          update={updateProp}
         />);
         break;
       }
     }
 
     for (let i = 0; i < updates.length; i += 1) {
-      if (i > 0 && !updates[i].props.month && !updates[i - 1].props.month
+      // puts divider after milestone if milestone is the most recent update
+      if (i === 0 && updates[i].props.project
+        && (updates[i + 1].props.update.date.getMonth()
+        < updates[i].props.project.endingDate.getMonth()
+        || updates[i + 1].props.update.date.getFullYear()
+        < updates[i].props.project.endingDate.getFullYear())) {
+        updates.splice(i + 1, 0, <Divider
+          key={`divider ${i}`}
+          month={`${helpers.monthNumberToString(updates[i].props.update.date.getMonth(), true)}
+          ${updates[i].props.update.date.getFullYear()}`}
+        />);
+      // puts divider before updates if they are earlier in time by a month or year
+      } else if (i > 0 && !updates[i].props.month && !updates[i - 1].props.month
         && (updates[i].props.update.date.getMonth() < updates[i - 1].props.update.date.getMonth()
         || updates[i].props.update.date.getFullYear()
         < updates[i - 1].props.update.date.getFullYear())) {
