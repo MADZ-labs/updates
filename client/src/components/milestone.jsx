@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import numberFormatter from 'number-formatter';
 import helpers from '../../../helpers/helpers';
 
 const Milestone = ({ update, project }) => {
@@ -36,10 +37,10 @@ const Milestone = ({ update, project }) => {
   let message = null;
   if (update && project.moneyRaised > project.goal) {
     date = project.endingDate;
-    message = `Successfully raised ${project.moneyRaised} with ${project.backers} backers`;
+    message = `Successfully raised ${numberFormatter('$#,###.', project.moneyRaised)} with ${numberFormatter('#,###.', project.backers)} backers`;
   } else if (update && project.moneyRaised < project.goal) {
     date = project.endingDate;
-    message = `Project failed to raise goal of ${project.goal}`;
+    message = `Project failed to raise goal of ${numberFormatter('$#,###.', project.goal)}`;
   } else {
     date = project.dateCreated;
     message = 'Project launched';
