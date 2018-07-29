@@ -22,5 +22,20 @@ const cutOffDesc = (desc) => {
   return desc;
 };
 
+let color = 0;
+const getColor = () => {
+  // #ffc29e
+  if (color === 0) {
+    color += 1;
+    return '#5fc';
+  } if (color === 1) {
+    color += 1;
+    return '#9cf';
+  }
+  color = 0;
+  return '#fca';
+};
+
 module.exports.monthNumberToString = monthNumberToString;
 module.exports.cutOffDesc = cutOffDesc;
+module.exports.getColor = getColor;

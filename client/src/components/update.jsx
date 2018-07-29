@@ -3,62 +3,61 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import helpers from '../../../helpers/helpers';
 
-const UpdateDiv = styled.div`
-  margin: 50px auto;
-  padding: 25px;
-  width: 50%;
-  text-align: center;
-  font-family: sans-serif;
-  background: white;
-  > * {
-    color: #2b2727;
-  }
-  > span:nth-child(1) {
-    font-weight: bold;
-  }
-  > span {
-    padding: 0 15px;
-    font-size: 14px;
-  }
-  > h3 {
-    display: table;
-    margin: 10px auto;
-    padding: 0 5px;
-    font-family: 'EB Garamond', serif;
-    font-size: 36px;
-  }
-  > p {
-    font-size: 16px;
-  }
-  &:hover {
-    cursor: pointer;
-    > h3 {
-      background: #ffc29e;
+const Update = ({ update, highlightColor }) => {
+  const UpdateDiv = styled.div`
+    margin: 50px auto;
+    padding: 25px;
+    width: 50%;
+    text-align: center;
+    font-family: sans-serif;
+    background: white;
+    > * {
+      color: #2b2727;
     }
-  }
-  > div {
-    display: inline;
-    margin: 15px;
-  }
-  > div > #backersSpan {
-    font-weight: bold;
-    font-size: 14px;
-  }
-  > div > div {
-    display: inline;
-    margin: 0 2px;
-    padding: 2px 5px;
-    border-radius: 50%;
-    background: black;
-    color: white;
-    font-size: 10px;
-  }
-  > p > span {
-    text-decoration: underline;
-  }
-`;
-
-const Update = ({ update }) => {
+    > span:nth-child(1) {
+      font-weight: bold;
+    }
+    > span {
+      padding: 0 15px;
+      font-size: 14px;
+    }
+    > h3 {
+      display: table;
+      margin: 10px auto;
+      padding: 0 5px;
+      font-family: 'EB Garamond', serif;
+      font-size: 36px;
+    }
+    > p {
+      font-size: 16px;
+    }
+    &:hover {
+      cursor: pointer;
+      > h3 {
+        background: ${highlightColor}
+      }
+    }
+    > div {
+      display: inline;
+      margin: 15px;
+    }
+    > div > #backersSpan {
+      font-weight: bold;
+      font-size: 14px;
+    }
+    > div > div {
+      display: inline;
+      margin: 0 2px;
+      padding: 2px 5px;
+      border-radius: 50%;
+      background: black;
+      color: white;
+      font-size: 10px;
+    }
+    > p > span {
+      text-decoration: underline;
+    }
+  `;
   const { date, backersOnly, description } = update;
   const formattedDate = `${helpers.monthNumberToString(date.getMonth())} ${date.getDate()}, ${date.getFullYear()}`;
 
@@ -136,6 +135,7 @@ Update.propTypes = {
     likes: PropTypes.number,
     backersOnly: PropTypes.bool,
   }).isRequired,
+  highlightColor: PropTypes.string.isRequired,
 };
 
 module.exports = Update;

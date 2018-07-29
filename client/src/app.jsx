@@ -36,8 +36,12 @@ class App extends React.Component {
   render() {
     const { project } = this.state;
     const reversedUpdates = project.updates.slice(0).reverse();
-    const updates = reversedUpdates.map(update => <Update key={update} update={update} />);
-
+    const updates = reversedUpdates.map(update => (
+      <Update
+        key={update}
+        update={update}
+        highlightColor={helpers.getColor()}
+      />));
     for (let i = 0; i < updates.length; i += 1) {
       if (updates[i].props.update.date < new Date()
       && updates[i].props.update.date < project.endingDate) {
