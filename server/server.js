@@ -13,9 +13,27 @@ app.use(express.static('client/dist'));
 
 app.get('/projects/:id', (req, res) => {
   db.query(`SELECT backers,date_created,ending_date,goal,money_raised FROM projects WHERE id=${req.params.id}`, (error, results) => {
-    const project = results[0];
+    const project = {
+      dateCreated: results[0].date_created,
+      endingDate: results[0].ending_date,
+      backers: results[0].backers,
+      moneyRaised: results[0].money_raised,
+      goal: results[0].goal,
+    };
     db.query(`SELECT backers_only,comments,description,likes,title,update_date FROM updates WHERE project_id=${req.params.id}`, (updatesError, updatesResults) => {
-      project.updates = updatesResults;
+      const updates = [];
+      updatesResults.forEach((update) => {
+        const updateObj = {
+          title: update.title,
+          description: update.description,
+          updateDate: update.update_date,
+          comments: update.comments,
+          likes: update.likes,
+          backersOnly: update.backers_only,
+        };
+        updates.push(updateObj);
+      });
+      project.updates = updates;
       res.send(project);
     });
   });
