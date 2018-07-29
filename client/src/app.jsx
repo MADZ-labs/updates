@@ -2,6 +2,7 @@ import './styles/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import shortid from 'shortid';
 import styled from 'styled-components';
 import Update from './components/update.jsx';
 import Milestone from './components/milestone.jsx';
@@ -56,7 +57,7 @@ class App extends React.Component {
     const reversedUpdates = project.updates.slice(0).reverse();
     const updates = reversedUpdates.map(update => (
       <Update
-        key={update}
+        key={shortid.generate()}
         update={update}
         highlightColor={helpers.getColor()}
       />));
@@ -72,7 +73,7 @@ class App extends React.Component {
           updateProp = update;
         }
         updates.splice(i, 0, <Milestone
-          key={`milestone ${i}`}
+          key={shortid.generate()}
           project={project}
           update={updateProp}
         />);
@@ -88,7 +89,7 @@ class App extends React.Component {
         || updates[i + 1].props.update.updateDate.getFullYear()
         < updates[i].props.project.endingDate.getFullYear())) {
         updates.splice(i + 1, 0, <Divider
-          key={`divider ${i}`}
+          key={shortid.generate()}
           month={`${helpers.monthNumberToString(updates[i].props.update.updateDate.getMonth(), true)}
           ${updates[i].props.update.updateDate.getFullYear()}`}
         />);
@@ -99,7 +100,7 @@ class App extends React.Component {
         || updates[i].props.update.updateDate.getFullYear()
         < updates[i - 1].props.update.updateDate.getFullYear())) {
         updates.splice(i, 0, <Divider
-          key={`divider ${i}`}
+          key={shortid.generate()}
           month={`${helpers.monthNumberToString(updates[i].props.update.updateDate.getMonth(), true)}
           ${updates[i].props.update.updateDate.getFullYear()}`}
         />);
