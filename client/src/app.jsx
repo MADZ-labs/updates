@@ -1,6 +1,8 @@
 import './styles/main.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+import Log from 'log';
 import styled from 'styled-components';
 import Update from './components/update.jsx';
 import Milestone from './components/milestone.jsx';
@@ -8,6 +10,8 @@ import Divider from './components/divider.jsx';
 import helpers from '../../helpers/helpers';
 
 const sampleData = require('../../sampleData.js');
+
+const log = new Log();
 
 const AppDiv = styled.div`
 
@@ -31,6 +35,15 @@ class App extends React.Component {
     this.state = {
       project: sampleData[0],
     };
+  }
+
+  componentDidMount() {
+    axios.get('/updates')
+      .then((response) => {
+        log(response);
+      }).catch((error) => {
+        log(error);
+      });
   }
 
   render() {
