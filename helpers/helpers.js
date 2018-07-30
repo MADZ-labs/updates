@@ -23,8 +23,10 @@ const cutOffDesc = (desc) => {
 };
 
 let color = 0;
-const getColor = () => {
-  // #ffc29e
+const getColor = (newRender) => {
+  if (newRender) {
+    color = 0;
+  }
   if (color === 0) {
     color += 1;
     return '#5fc';
