@@ -117,7 +117,7 @@ class App extends React.Component {
         > updates[i + 1].props.project.endingDate.getFullYear())) {
         updates.splice(i + 1, 0, <Divider
           key={shortid.generate()}
-          month={moment(updates[i].props.update.updateDate).format('MMM YYYY')}
+          month={moment(updates[i + 1].props.project.endingDate).format('MMM YYYY')}
         />);
       }
     }
