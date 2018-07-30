@@ -98,6 +98,18 @@ class App extends React.Component {
           month={`${helpers.monthNumberToString(updates[i].props.update.updateDate.getMonth(), true)}
           ${updates[i].props.update.updateDate.getFullYear()}`}
         />);
+      // puts divider before milestone if its earlier in time by a month or year
+      } else if (i < updates.length - 1 && updates[i + 1].props.project
+        && !updates[i].props.month && !updates[i + 1].props.month
+        && (updates[i].props.update.updateDate.getMonth()
+        > updates[i + 1].props.project.endingDate.getMonth()
+        || updates[i].props.update.updateDate.getFullYear()
+        > updates[i + 1].props.project.endingDate.getFullYear())) {
+        updates.splice(i + 1, 0, <Divider
+          key={shortid.generate()}
+          month={`${helpers.monthNumberToString(updates[i + 1].props.project.endingDate.getMonth(), true)}
+          ${updates[i + 1].props.project.endingDate.getFullYear()}`}
+        />);
       // puts divider before updates if they are earlier in time by a month or year
       } else if (i > 0 && !updates[i].props.month && !updates[i - 1].props.month
         && (updates[i].props.update.updateDate.getMonth()
