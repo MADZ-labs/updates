@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import styled from 'styled-components';
 import helpers from '../../../helpers/helpers';
 
@@ -59,7 +60,6 @@ const Update = ({ update, highlightColor }) => {
     }
   `;
   const { updateDate, backersOnly, description } = update;
-  const formattedDate = `${helpers.monthNumberToString(updateDate.getMonth())} ${updateDate.getDate()}, ${updateDate.getFullYear()}`;
 
   let desc = null;
   let backersOnlyDesc = null;
@@ -113,7 +113,7 @@ const Update = ({ update, highlightColor }) => {
   return (
     <UpdateDiv>
       <span>
-        {formattedDate}
+        {moment(updateDate).format('MMMM D, YYYY')}
       </span>
       <h3>
         {update.title}

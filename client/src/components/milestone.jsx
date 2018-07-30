@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import styled from 'styled-components';
 import numberFormatter from 'number-formatter';
-import helpers from '../../../helpers/helpers';
 
 const Milestone = ({ update, project }) => {
   let bg = '';
@@ -45,11 +45,10 @@ const Milestone = ({ update, project }) => {
     date = project.dateCreated;
     message = 'Project launched';
   }
-  const formattedDate = `${helpers.monthNumberToString(date.getMonth())} ${date.getDate()}, ${date.getFullYear()}`;
   return (
     <MilestoneDiv>
       <span>
-        {formattedDate}
+        {moment(date).format('MMMM D, YYYY')}
       </span>
       <h3>
         {message}
