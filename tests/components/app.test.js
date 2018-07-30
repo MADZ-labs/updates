@@ -6,13 +6,12 @@ import Milestone from '../../client/src/components/milestone';
 jest.mock('react-dom');
 
 describe('App component', () => {
+  const wrapper = shallow(<App />);
   it('is rendered', () => {
-    const wrapper = shallow(<App />);
     expect(wrapper.exists()).toBeTruthy();
   });
 
   it('renders a milestone component', () => {
-    const wrapper = shallow(<App />);
     expect(wrapper.find(Milestone).exists()).toBeTruthy();
   });
 });
