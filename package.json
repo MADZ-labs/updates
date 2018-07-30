@@ -22,6 +22,7 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.4.2",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
@@ -47,6 +48,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "express": "^4.16.3",
     "log": "^1.4.0",
     "moment": "^2.22.2",
@@ -61,5 +63,13 @@
     "redux": "^4.0.0",
     "shortid": "^2.2.12",
     "styled-components": "^3.3.3"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/tests/enzymeSetup.js"
+    ],
+    "moduleNameMapper": {
+      ".*\\.(css|scss)$": "<rootDir>/emptyModule.js"
+    }
   }
 }
