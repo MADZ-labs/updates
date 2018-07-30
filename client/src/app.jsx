@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import shortid from 'shortid';
+import moment from 'moment';
 import styled from 'styled-components';
 import Update from './components/update.jsx';
 import Milestone from './components/milestone.jsx';
@@ -95,8 +96,7 @@ class App extends React.Component {
         < updates[i].props.project.endingDate.getFullYear())) {
         updates.splice(i + 1, 0, <Divider
           key={shortid.generate()}
-          month={`${helpers.monthNumberToString(updates[i].props.update.updateDate.getMonth(), true)}
-          ${updates[i].props.update.updateDate.getFullYear()}`}
+          month={moment(updates[i].props.update.updateDate).format('MMM YYYY')}
         />);
       // puts divider before updates if they are earlier in time by a month or year
       } else if (i > 0 && !updates[i].props.month && !updates[i - 1].props.month
@@ -106,8 +106,7 @@ class App extends React.Component {
         < updates[i - 1].props.update.updateDate.getFullYear())) {
         updates.splice(i, 0, <Divider
           key={shortid.generate()}
-          month={`${helpers.monthNumberToString(updates[i].props.update.updateDate.getMonth(), true)}
-          ${updates[i].props.update.updateDate.getFullYear()}`}
+          month={moment(updates[i].props.update.updateDate).format('MMM YYYY')}
         />);
       // puts divider before milestone if its earlier in time by a month or year
       } else if (i < updates.length - 1 && updates[i + 1].props.project
@@ -118,8 +117,7 @@ class App extends React.Component {
         > updates[i + 1].props.project.endingDate.getFullYear())) {
         updates.splice(i + 1, 0, <Divider
           key={shortid.generate()}
-          month={`${helpers.monthNumberToString(updates[i + 1].props.project.endingDate.getMonth(), true)}
-          ${updates[i + 1].props.project.endingDate.getFullYear()}`}
+          month={moment(updates[i].props.update.updateDate).format('MMM YYYY')}
         />);
       }
     }
