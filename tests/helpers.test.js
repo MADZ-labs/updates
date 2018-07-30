@@ -16,3 +16,14 @@ describe('cutOffDesc', () => {
     expect(truncatedDesc.slice(truncatedDesc.length - 4, truncatedDesc.length)).toEqual('... ');
   });
 });
+
+describe('getColor', () => {
+  it('should reset color to 0 if newRender parameter is passed a truthy argument', () => {
+    expect(helpers.getColor(true)).toEqual('#5fc');
+  });
+
+  it('should increment color when called', () => {
+    const first = helpers.getColor();
+    expect(helpers.getColor()).not.toEqual(first);
+  });
+});
