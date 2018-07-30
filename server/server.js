@@ -20,7 +20,7 @@ app.get('/projects/:id', (req, res) => {
       moneyRaised: results[0].money_raised,
       goal: results[0].goal,
     };
-    db.query(`SELECT backers_only,comments,description,likes,title,update_date FROM updates WHERE project_id=${req.params.id}`, (updatesError, updatesResults) => {
+    db.query(`SELECT backers_only,comments,description,likes,title,update_date FROM updates WHERE project_id=${req.params.id} ORDER BY update_date`, (updatesError, updatesResults) => {
       const updates = [];
       updatesResults.forEach((update) => {
         const updateObj = {
