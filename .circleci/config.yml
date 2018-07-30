@@ -3,9 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.11.3
-      - image: circleci/mysql:8.0.11
     steps:
       - checkout
       - run: npm install
-      - run : mysql -u root < ../schema.sql -p
       - run: npm test
