@@ -7,7 +7,6 @@ const log = new Log();
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'password',
   database: 'update_feature',
 });
 
