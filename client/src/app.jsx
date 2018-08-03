@@ -36,7 +36,7 @@ export default class App extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     axios.get('/projects/21')
       .then((response) => {
         response.data.dateCreated = new Date(response.data.dateCreated);

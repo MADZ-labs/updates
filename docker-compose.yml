@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  db:
+    build: ./db/
+    image: mysql:5.7
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_USER: root
+      MYSQL_DATABASE: update_feature
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+
+  update:
+    build: .
+    depends_on:
+      - 'db'
+    restart: on-failure
+    ports:
+      - '3004:3004'

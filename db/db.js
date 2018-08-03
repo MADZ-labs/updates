@@ -5,7 +5,7 @@ const Log = require('log');
 const log = new Log();
 
 const connection = mysql.createConnection({
-  host: 'localhost',
+  host: 'db',
   user: 'root',
   database: 'update_feature',
 });
